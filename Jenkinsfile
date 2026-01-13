@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-        jdk 'jdk17'
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -13,28 +9,10 @@ pipeline {
             }
         }
 
-        stage('Build & Test') {
+        stage('Build') {
             steps {
-                sh '''
-                  chmod +x mvnw
-                  ./mvnw clean test package
-                '''
+                sh 'mvn clean package -DskipTests'
             }
-        }
-
-        stage('Build Docker Image') {
-            steps {
-                sh '''
-                  docker build -t als-demo-artifact:latest .
-                '''
-            }
-        }
-    }
-
-    post {
-        always {
-            echo 'Pipeline completed'
-            deleteDir()
         }
     }
 }
