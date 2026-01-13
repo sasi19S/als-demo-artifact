@@ -6,12 +6,6 @@ pipeline {
         DOCKER_IMAGE = "als-demo-artifact:latest"
     }
 
-    tools {
-        // Maven tool name configured in Jenkins → Global Tool Configuration
-        maven 'Maven-3.9.0' 
-        // Git is auto-detected
-    }
-
     stages {
 
         stage('Checkout') {
